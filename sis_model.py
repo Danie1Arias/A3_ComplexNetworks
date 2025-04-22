@@ -12,7 +12,7 @@ class SISModel:
         self._initialize_infection()
 
     def _initialize_infection(self):
-        infected = random.sample(list(self.G.nodes()), int(self.rho0 * self.N))
+        infected = random.sample(list(self.G.nodes()), max(30, int(self.rho0 * self.N)))
         for node in infected:
             self.states[node] = "I"
 
