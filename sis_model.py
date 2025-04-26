@@ -1,6 +1,9 @@
 import numpy as np
 import random
 
+from matplotlib import pyplot as plt
+
+
 class SISModel:
     def __init__(self, graph, beta, mu, rho0=0.2):
         self.G = graph
@@ -31,10 +34,12 @@ class SISModel:
 
     def run(self, Tmax=1000, Ttrans=900):
         rho_t = []
+        rho_values = []
         for t in range(Tmax):
             self.step()
             infected = sum(1 for state in self.states.values() if state == "I")
             rho = infected / self.N
+            rho_values.append(rho)
             if t >= Ttrans:
                 rho_t.append(rho)
-        return np.mean(rho_t)
+        return np.mean(rho_t), rho_values
